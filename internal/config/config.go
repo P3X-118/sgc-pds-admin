@@ -25,7 +25,11 @@ type SessionConfig struct {
 }
 
 type OAuthConfig struct {
-	Okta *OktaProvider `yaml:"okta,omitempty"`
+	Okta      *OktaProvider    `yaml:"okta,omitempty"`
+	Google    *GenericProvider `yaml:"google,omitempty"`
+	Microsoft *GenericProvider `yaml:"microsoft,omitempty"`
+	Facebook  *GenericProvider `yaml:"facebook,omitempty"`
+	Twitter   *GenericProvider `yaml:"twitter,omitempty"`
 }
 
 type OktaProvider struct {
@@ -33,6 +37,13 @@ type OktaProvider struct {
 	ClientID         string `yaml:"client_id"`
 	ClientSecretFile string `yaml:"client_secret_file"`
 	CallbackURL      string `yaml:"callback_url"`
+}
+
+type GenericProvider struct {
+	ClientID         string   `yaml:"client_id"`
+	ClientSecretFile string   `yaml:"client_secret_file"`
+	CallbackURL      string   `yaml:"callback_url"`
+	Scopes           []string `yaml:"scopes,omitempty"`
 }
 
 type AllowEntry struct {
@@ -74,7 +85,7 @@ func Load(path string) (*Config, error) {
 	if c.Goat.BinaryPath == "" {
 		c.Goat.BinaryPath = "goat"
 	}
-	if c.OAuth.Okta == nil {
+	if c.OAuth.Okta == nil && c.OAuth.Google == nil && c.OAuth.Microsoft == nil && c.OAuth.Facebook == nil && c.OAuth.Twitter == nil {
 		return nil, fmt.Errorf("at least one OAuth provider must be configured")
 	}
 	if len(c.Instances) == 0 {

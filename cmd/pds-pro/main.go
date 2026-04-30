@@ -25,14 +25,14 @@ func main() {
 		log.Fatalf("config: %v", err)
 	}
 
-	providers, err := auth.RegisterProviders(cfg)
-	if err != nil {
-		log.Fatalf("oauth: %v", err)
-	}
-
 	sm, err := auth.NewManager(cfg.Session.SecretFile, cfg.Session.Secure, cfg.Session.MaxAgeSec)
 	if err != nil {
 		log.Fatalf("session: %v", err)
+	}
+
+	providers, err := auth.RegisterProviders(cfg, sm)
+	if err != nil {
+		log.Fatalf("oauth: %v", err)
 	}
 
 	al, err := audit.New(cfg.Audit.LogPath)

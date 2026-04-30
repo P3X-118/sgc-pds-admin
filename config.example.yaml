@@ -10,12 +10,43 @@ session:
   max_age_sec: 86400
 
 oauth:
+  # Each provider block is optional. Configure as many as you want; the login
+  # page renders one button per enabled provider. Subjects in the audit log
+  # are namespaced as "<provider>|<provider-user-id>" so identities stay
+  # unambiguous across providers.
   okta:
     org_url: "https://example.okta.com"
     client_id: "0oaXXXXXXXXXXXXXX"
     # File contents = the Okta client secret (single line, no quotes)
     client_secret_file: "/run/secrets/pds-pro/okta-client-secret"
     callback_url: "https://admin.pds.example.com/auth/okta/callback"
+
+  # google:
+  #   client_id: "XXXXXXXXXX.apps.googleusercontent.com"
+  #   client_secret_file: "/run/secrets/pds-pro/google-client-secret"
+  #   callback_url: "https://admin.pds.example.com/auth/google/callback"
+  #   # scopes: ["email", "profile"]   # default
+
+  # microsoft:
+  #   # Azure AD / Entra ID via the goth microsoftonline provider.
+  #   # The URL path uses goth's internal name: /auth/microsoftonline/callback
+  #   client_id: "00000000-0000-0000-0000-000000000000"
+  #   client_secret_file: "/run/secrets/pds-pro/microsoft-client-secret"
+  #   callback_url: "https://admin.pds.example.com/auth/microsoftonline/callback"
+
+  # facebook:
+  #   client_id: "0000000000000000"
+  #   client_secret_file: "/run/secrets/pds-pro/facebook-client-secret"
+  #   callback_url: "https://admin.pds.example.com/auth/facebook/callback"
+  #   # scopes: ["email"]              # default
+
+  # twitter:
+  #   # X (Twitter) via the goth twitterv2 provider — OAuth 1.0a against the
+  #   # v2 API. Scopes are not configurable for this provider.
+  #   # The URL path uses goth's internal name: /auth/twitterv2/callback
+  #   client_id: "XXXXXXXXXXXXXXXX"
+  #   client_secret_file: "/run/secrets/pds-pro/twitter-client-secret"
+  #   callback_url: "https://admin.pds.example.com/auth/twitterv2/callback"
 
 # Operators allowed to access the app. First match wins.
 # An entry with `subject` matches the OAuth provider-prefixed subject
