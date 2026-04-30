@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SGC PDS Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #888; padding-bottom: .5rem; margin-bottom: 1rem; }
+  header h1 { margin: 0; font-size: 1.2rem; }
+  header form { display: inline; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid #444; font-family: ui-monospace, monospace; font-size: .9rem; }
+  th { font-family: system-ui, sans-serif; }
+  form.stacked label { display: block; margin: .6rem 0; }
+  form.stacked input { width: 100%; padding: .4rem; box-sizing: border-box; font: inherit; }
+  button { padding: .4rem .8rem; font: inherit; cursor: pointer; }
+  .danger { color: #c33; }
+  .actions form { display: inline; }
+  .muted { color: #888; font-size: .85rem; }
+  pre { background: #2222; padding: .6rem; overflow-x: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="/" style="text-decoration:none;color:inherit">SGC PDS Admin</a></h1>
+  {{if .User}}
+    <div>
+      <span class="muted">{{.User.Email}}</span>
+      <form method="post" action="/logout"><button>Logout</button></form>
+    </div>
+  {{end}}
+</header>
+<main>{{block "content" .}}{{end}}</main>
+</body>
+</html>

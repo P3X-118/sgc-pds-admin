@@ -1,0 +1,34 @@
+{{define "content"}}
+<p><a href="/">&larr; instances</a></p>
+<h2>{{.Instance.Name}} accounts</h2>
+<p class="muted">{{.Instance.PDSHost}}</p>
+<p><a href="/instances/{{.Instance.Name}}/accounts/new"><button>+ New account</button></a></p>
+{{if .Accounts}}
+<table>
+  <thead><tr><th>DID</th><th>Status</th><th>Rev</th><th class="actions"></th></tr></thead>
+  <tbody>
+  {{range .Accounts}}
+    <tr>
+      <td>{{.DID}}</td>
+      <td>{{.Status}}</td>
+      <td>{{.Rev}}</td>
+      <td class="actions">
+        {{if eq .Status "active"}}
+        <form method="post" action="/instances/{{$.Instance.Name}}/accounts/{{.DID}}/takedown"
+              onsubmit="return confirm('Take down {{.DID}}?')">
+          <button class="danger">Takedown</button>
+        </form>
+        {{else}}
+        <form method="post" action="/instances/{{$.Instance.Name}}/accounts/{{.DID}}/takedown?reverse=1">
+          <button>Reverse takedown</button>
+        </form>
+        {{end}}
+      </td>
+    </tr>
+  {{end}}
+  </tbody>
+</table>
+{{else}}
+<p>No accounts.</p>
+{{end}}
+{{end}}

@@ -1,0 +1,11 @@
+{{define "content"}}
+<p><a href="/instances/{{.Instance.Name}}/accounts">&larr; accounts</a></p>
+<h2>Account created</h2>
+<table>
+  <tr><th>Handle</th><td>{{.Handle}}</td></tr>
+  <tr><th>Email</th><td>{{.Email}}</td></tr>
+  <tr><th>Password</th><td><code>{{.Password}}</code></td></tr>
+</table>
+<p class="danger">Share this password securely with the account owner. It will not be shown again.</p>
+{{if .Output}}<details><summary>goat output</summary><pre>{{printf "%s" .Output}}</pre></details>{{end}}
+{{end}}

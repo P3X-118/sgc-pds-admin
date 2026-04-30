@@ -1,0 +1,8 @@
+{{define "content"}}
+<h2>Sign in</h2>
+{{range .Providers}}
+  <p><a href="/auth/{{.}}"><button>Sign in with {{.}}</button></a></p>
+{{else}}
+  <p class="danger">No OAuth providers configured.</p>
+{{end}}
+{{end}}

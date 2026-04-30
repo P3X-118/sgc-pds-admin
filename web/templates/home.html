@@ -1,0 +1,19 @@
+{{define "content"}}
+<h2>PDS instances</h2>
+{{if .Instances}}
+<table>
+  <thead><tr><th>Name</th><th>Host</th><th></th></tr></thead>
+  <tbody>
+  {{range .Instances}}
+    <tr>
+      <td>{{.Name}}</td>
+      <td>{{.PDSHost}}</td>
+      <td><a href="/instances/{{.Name}}/accounts">Accounts</a></td>
+    </tr>
+  {{end}}
+  </tbody>
+</table>
+{{else}}
+<p>No instances configured.</p>
+{{end}}
+{{end}}

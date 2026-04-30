@@ -1,0 +1,6 @@
+/sgc-pds-admin
+/dist/
+/.claude/
+config.yaml
+*.log
+session-secret
